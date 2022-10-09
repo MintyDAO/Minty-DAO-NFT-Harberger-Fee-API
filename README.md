@@ -16,7 +16,7 @@ AUTH_TOKEN=
 ```
 CREATE DATABASE MintyDAONFT;
 
-CREATE TABLE nfts(nftAddress VARCHAR(128), PRIMARY KEY(nftAddress));
+CREATE TABLE nfts(nftAddress VARCHAR(128), nftName VARCHAR(128), PRIMARY KEY(nftAddress));
 ```
 
 ## Run API
