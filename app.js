@@ -13,7 +13,6 @@ const cors = require('cors')
 // const BlockListener = require('./updater_logic/BlockListener')
 const BlockListenerHttp = require('./updater_logic/BlockListenerHttp')
 const memoryController = require('./memoryController')
-const restoreTxs = require('./restore/restoreTxs')
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -28,8 +27,6 @@ io.on('connection', socketManager)
 http.listen(port)
 console.log('Listening on port ' + port + " Version 22/09/21")
 
-// Restore all txs
-restoreTxs()
 
 // Update smartfunds data when new Block was created
 // BlockListener

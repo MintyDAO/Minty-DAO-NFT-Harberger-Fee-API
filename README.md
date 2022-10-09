@@ -1,14 +1,3 @@
-## NOTE
-```
-DON"T USE OUR OWN GETH NODE, USE Infura for ETH Chain events
-Beacuse our node can miss events
-
-In this files
-
-/updater_logic/updater.js
-/restore/restoreTxs.js
-
-```
 
 
 ## Create .env
