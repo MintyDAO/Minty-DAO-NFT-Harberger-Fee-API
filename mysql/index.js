@@ -59,16 +59,16 @@ exports.countCollections = async () => {
   }
 }
 
-// exports.getAllNFTSInDB = async () => {
-//   const q = "SELECT * FROM nfts"
-//   try {
-//     const rows = await query(q)
-//     return rows
-//   } catch(err) {
-//     throw err
-//   }
-// }
-//
+exports.getAllCollections = async () => {
+  const q = "SELECT * FROM collections"
+  try {
+    const rows = await query(q)
+    return rows
+  } catch(err) {
+    throw err
+  }
+}
+
 // exports.getNFT = async (tokenIndex) => {
 //   const q = "SELECT * FROM nfts WHERE tokenIndex like ?"
 //   try {

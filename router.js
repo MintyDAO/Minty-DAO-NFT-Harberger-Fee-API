@@ -4,14 +4,12 @@ const router = express.Router()
 
 // const store = require('store')
 
-
-
 router.get('/', function(req, res) {
     res.json({ message: 'API is Online!' })
 })
 
-router.route('/nfts/').get(async (req, res) => {
-  const result = await mysql.getAllNFTSInDB()
+router.route('/collections/').get(async (req, res) => {
+  const result = await mysql.getAllCollections()
   res.json({ result })
 })
 
@@ -45,7 +43,7 @@ router.route('/reserve-token/').post(async (req, res) => {
   }
 })
 
-// NO NEED because we upadte this via events 
+// NO NEED because we upadte this via events
 
 // router.route('/buy-token/').post(async (req, res) => {
 //   if(req.headers.authorization === 'Bearer ' + process.env.AUTH_TOKEN){
