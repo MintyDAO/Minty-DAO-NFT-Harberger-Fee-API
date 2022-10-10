@@ -25,13 +25,18 @@ module.exports = async (BlockLatest) => {
       const name = await collection.methods.name().call()
       const symbol = await collection.methods.symbol().call()
       const initialPrice = await collection.methods.initialPrice().call()
+      const uri = await collection.methods.uri().call()
       const maxSupply = await collection.methods.maxSupply().call()
 
-      console.log("Index ", address)
+      await mysql.insertNewCollection(
+        address,
+        name,
+        symbol,
+        initialPrice,
+        uri,
+        maxSupply
+      )
     }
+    console.log("Insert new collection", address)
   }
-
-  console.log("BlockLatest", BlockLatest)
-  console.log("Total nfts ", nftInContract)
-  console.log("Count", nftInDB)
 }

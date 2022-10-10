@@ -22,21 +22,24 @@ exports.insertNewCollection = async (
   name,
   symbol,
   initialPrice,
-  uri
+  uri,
+  maxSupply
 ) => {
   const q = `INSERT IGNORE INTO collections (
     address,
     name,
     symbol,
     initialPrice,
-    uri
+    uri,
+    maxSupply
   ) VALUES (?)`
   const values = [
     address,
     name,
     symbol,
     initialPrice,
-    uri
+    uri,
+    maxSupply
   ]
   try {
     await query(q, [values])

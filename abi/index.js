@@ -43,7 +43,7 @@ exports.NFT_COLLECTION_ABI = [
 			},
 			{
 				"internalType": "string",
-				"name": "_baseURI",
+				"name": "_uri",
 				"type": "string"
 			}
 		],
@@ -586,6 +586,19 @@ exports.NFT_COLLECTION_ABI = [
 	},
 	{
 		"inputs": [],
+		"name": "uri",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "veHolders",
 		"outputs": [
 			{
@@ -600,6 +613,44 @@ exports.NFT_COLLECTION_ABI = [
 ]
 
 exports.NFT_FACTORY_ABI = [
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "creator",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "collection",
+				"type": "address"
+			}
+		],
+		"name": "NewCollection",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "collections",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
 	{
 		"inputs": [
 			{
@@ -646,44 +697,6 @@ exports.NFT_FACTORY_ABI = [
 		"name": "create",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "creator",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "collection",
-				"type": "address"
-			}
-		],
-		"name": "NewCollection",
-		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "collections",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
