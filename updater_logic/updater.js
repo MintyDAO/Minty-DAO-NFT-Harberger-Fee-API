@@ -16,17 +16,17 @@ const web3 = new Web3(process.env.NODE_PROVIDER)
 module.exports = async (BlockLatest) => {
   const factory = new web3.eth.Contract(abi.NFT_FACTORY_ABI, config.NFT_FACTORY)
   const nftInDB = await mysql.countCollections()
-  const nftInContract = await factory.methods.totalNFTs().call()
+  const nftInContract = await factory.methods.totalCollections().call()
 
   if(nftInContract > nftInDB){
     for(let i = nftInDB; i < nftInContract; i++){
-      const address = await factory.methods.nfts(i).call()
-      const collection = new web3.eth.Contract(abi.NFT_COLLECTION_ABI, i)
+      const address = await factory.methods.collections(i).call()
+      const collection = new web3.eth.Contract(abi.NFT_COLLECTION_ABI, address)
       const name = await collection.methods.name().call()
       const symbol = await collection.methods.symbol().call()
       const initialPrice = await collection.methods.initialPrice().call()
       const maxSupply = await collection.methods.maxSupply().call()
-      
+
       console.log("Index ", address)
     }
   }
