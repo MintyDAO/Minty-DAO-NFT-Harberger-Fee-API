@@ -15,7 +15,23 @@ const web3 = new Web3(process.env.NODE_PROVIDER)
 // Search NFTCreated event in each new block - 5 blocks for ensure
 module.exports = async (BlockLatest) => {
   const factory = new web3.eth.Contract(abi.NFT_FACTORY_ABI, config.NFT_FACTORY)
+  const nftInDB = await mysql.countCollections()
+  const nftInContract = await factory.methods.totalNFTs().call()
+
+  if(nftInContract > nftInDB){
+    for(let i = nftInDB; i < nftInContract; i++){
+      const address = await factory.methods.nfts(i).call()
+      const collection = new web3.eth.Contract(abi.NFT_COLLECTION_ABI, i)
+      const name = await collection.methods.name().call()
+      const symbol = await collection.methods.symbol().call()
+      const initialPrice = await collection.methods.initialPrice().call()
+      const maxSupply = await collection.methods.maxSupply().call()
+      
+      console.log("Index ", address)
+    }
+  }
+
   console.log("BlockLatest", BlockLatest)
-  console.log("Total nfts ", await factory.methods.totalNFTs().call())
-  console.log("Count", await mysql.countCollections())
+  console.log("Total nfts ", nftInContract)
+  console.log("Count", nftInDB)
 }

@@ -50,7 +50,7 @@ exports.countCollections = async () => {
   const q = "SELECT COUNT(address) FROM collections"
   try {
     const rows = await query(q)
-    return rows
+    return rows[0]['COUNT(address)']
   } catch(err) {
     throw err
   }
