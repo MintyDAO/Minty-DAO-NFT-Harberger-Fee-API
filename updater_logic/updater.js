@@ -17,4 +17,5 @@ module.exports = async (BlockLatest) => {
   const factory = new web3.eth.Contract(abi.NFT_FACTORY_ABI, config.NFT_FACTORY)
   console.log("BlockLatest", BlockLatest)
   console.log("Total nfts ", await factory.methods.totalNFTs().call())
+  console.log("Count", await mysql.countCollections())
 }
