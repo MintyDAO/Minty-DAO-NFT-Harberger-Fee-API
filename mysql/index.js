@@ -72,16 +72,16 @@ exports.getAllCollections = async () => {
   }
 }
 
-// exports.getNFT = async (tokenIndex) => {
-//   const q = "SELECT * FROM nfts WHERE tokenIndex like ?"
-//   try {
-//     const rows = await query(q, tokenIndex)
-//     return rows[0]
-//   } catch(err) {
-//     throw err
-//   }
-// }
-//
+exports.getCollection = async (address) => {
+  const q = "SELECT * FROM collections WHERE address like ?"
+  try {
+    const rows = await query(q, address)
+    return rows[0]
+  } catch(err) {
+    throw err
+  }
+}
+
 // exports.updateNFTValue = async (columnName, value, tokenIndex, jsonTrue) => {
 //   const q = "UPDATE nfts SET " + columnName + " = ? WHERE tokenIndex = ?"
 //   let _value = value

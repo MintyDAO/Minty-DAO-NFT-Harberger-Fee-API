@@ -13,8 +13,8 @@ router.route('/collections/').get(async (req, res) => {
   res.json({ result })
 })
 
-router.route('/nft/:index').get(async (req, res) => {
-  const result = await mysql.getNFT(req.params.index)
+router.route('/collection/:address').get(async (req, res) => {
+  const result = await mysql.getCollection(req.params.address)
   res.json({ result })
 })
 
