@@ -23,7 +23,8 @@ exports.insertNewCollection = async (
   symbol,
   initialPrice,
   uri,
-  maxSupply
+  maxSupply,
+  format
 ) => {
   const q = `INSERT IGNORE INTO collections (
     address,
@@ -31,7 +32,8 @@ exports.insertNewCollection = async (
     symbol,
     initialPrice,
     uri,
-    maxSupply
+    maxSupply,
+    format
   ) VALUES (?)`
   const values = [
     address,
@@ -39,7 +41,8 @@ exports.insertNewCollection = async (
     symbol,
     initialPrice,
     uri,
-    maxSupply
+    maxSupply,
+    format
   ]
   try {
     await query(q, [values])

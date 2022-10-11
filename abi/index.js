@@ -45,6 +45,11 @@ exports.NFT_COLLECTION_ABI = [
 				"internalType": "string",
 				"name": "_uri",
 				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_format",
+				"type": "string"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -204,6 +209,19 @@ exports.NFT_COLLECTION_ABI = [
 		"name": "forceBuy",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "format",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -614,44 +632,6 @@ exports.NFT_COLLECTION_ABI = [
 
 exports.NFT_FACTORY_ABI = [
 	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "creator",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "collection",
-				"type": "address"
-			}
-		],
-		"name": "NewCollection",
-		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "collections",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "string",
@@ -692,11 +672,54 @@ exports.NFT_FACTORY_ABI = [
 				"internalType": "string",
 				"name": "_baseURI",
 				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_format",
+				"type": "string"
 			}
 		],
 		"name": "create",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "creator",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "collection",
+				"type": "address"
+			}
+		],
+		"name": "NewCollection",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "collections",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
