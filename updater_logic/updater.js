@@ -39,6 +39,6 @@ module.exports = async (BlockLatest) => {
         format
       )
     }
-    console.log("Insert new collection", address)
+    console.log("Insert new collection")
   }
 }
