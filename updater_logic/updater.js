@@ -28,6 +28,7 @@ module.exports = async (BlockLatest) => {
       const uri = await collection.methods.uri().call()
       const maxSupply = await collection.methods.maxSupply().call()
       const format = await collection.methods.format().call()
+      const ipfsHash = await collection.methods.ipfsHash().call()
 
       await mysql.insertNewCollection(
         address,
@@ -36,7 +37,8 @@ module.exports = async (BlockLatest) => {
         initialPrice,
         uri,
         maxSupply,
-        format
+        format,
+        ipfsHash
       )
     }
     console.log("Insert new collection")

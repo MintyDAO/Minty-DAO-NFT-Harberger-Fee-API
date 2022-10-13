@@ -24,7 +24,8 @@ exports.insertNewCollection = async (
   initialPrice,
   uri,
   maxSupply,
-  format
+  format,
+  ipfsHash
 ) => {
   const q = `INSERT IGNORE INTO collections (
     address,
@@ -33,7 +34,8 @@ exports.insertNewCollection = async (
     initialPrice,
     uri,
     maxSupply,
-    format
+    format,
+    ipfsHash
   ) VALUES (?)`
   const values = [
     address,
@@ -42,7 +44,8 @@ exports.insertNewCollection = async (
     initialPrice,
     uri,
     maxSupply,
-    format
+    format,
+    ipfsHash
   ]
   try {
     await query(q, [values])
