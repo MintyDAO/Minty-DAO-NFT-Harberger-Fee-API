@@ -114,6 +114,16 @@ exports.updateCollectionDetails = async (collection, nfts) => {
   }
 }
 
+exports.getCollectionsDetails = async () => {
+  const q = "SELECT * FROM collectionDetails"
+  try {
+    const rows = await query(q)
+    return rows
+  } catch(err) {
+    throw err
+  }
+}
+
 exports.getCollectionDetails = async (collection) => {
   const q = "SELECT nfts FROM collectionDetails WHERE collection like ?"
   try {
