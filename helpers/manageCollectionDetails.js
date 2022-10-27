@@ -4,7 +4,7 @@ const parseSqlResult = require('./parseSqlResult')
 module.exports = async (nftAddress, nftId, protectionTime) => {
   const request = parseSqlResult(await mysql.getCollectionDetails(nftAddress))
   const dataJson = request.length > 0 ? JSON.parse(request[0]['nfts']) : {}
-  // should update
+  // should update collection
   if(dataJson.hasOwnProperty(nftAddress)){
 
     dataJson[nftAddress].filter(item => {
@@ -22,7 +22,7 @@ module.exports = async (nftAddress, nftId, protectionTime) => {
 
     return await mysql.updateCollectionDetails(nftAddress, dataJson)
   }
-  // should insert
+  // should insert collection
   else{
     const dataJson = {
       [nftAddress]:[
