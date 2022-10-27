@@ -43,6 +43,32 @@ router.route('/reserve-token/').post(async (req, res) => {
   }
 })
 
+router.route('/buy-token/').post(async (req, res) => {
+  if(req.headers.authorization === 'Bearer ' + process.env.AUTH_TOKEN){
+
+    const result = await mysql.updateNFTValue(
+      "tokenIndexUsed",
+       1,
+       req.body.tokenIndex,
+       req.body.tokenIndex,
+       false
+     )
+
+    switch(result) {
+      case 'Ok':
+      res.status(200).send("Ok")
+      break
+
+      default:
+      res.status(500).send("Internal Server Error")
+      break
+    }
+  }
+  else{
+    res.status(401).send("Unauthorized")
+  }
+})
+
 // NO NEED because we upadte this via events
 
 // router.route('/buy-token/').post(async (req, res) => {

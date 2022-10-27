@@ -16,7 +16,7 @@ connection.connect((err) => {
 
 const query = util.promisify(connection.query).bind(connection);
 
-
+// COLLECTIONS
 exports.insertNewCollection = async (
   address,
   name,
@@ -80,6 +80,45 @@ exports.getCollection = async (address) => {
   try {
     const rows = await query(q, address)
     return rows[0]
+  } catch(err) {
+    throw err
+  }
+}
+
+// collection details
+// details about minted nfts
+exports.insertCollectionDetails = async (collection, nfts) => {
+  const q = `INSERT IGNORE INTO collectionDetails (
+    collection,
+    nfts
+  ) VALUES (?)`
+  const values = [
+    collection,
+    JSON.stringify(nfts)
+  ]
+  try {
+    await query(q, [values])
+    return "Ok"
+  } catch(err) {
+    throw err
+  }
+}
+
+exports.updateCollectionDetails = async (collection, nfts) => {
+  const q = "UPDATE collectionDetails SET nfts = ? WHERE collection = ?"
+  try {
+    await query(q, [JSON.stringify(nfts), collection])
+    return "Ok"
+  } catch(err) {
+    throw err
+  }
+}
+
+exports.getCollectionDetails = async (collection) => {
+  const q = "SELECT nfts FROM collectionDetails WHERE collection like ?"
+  try {
+    const rows = await query(q, collection)
+    return rows
   } catch(err) {
     throw err
   }
