@@ -26,8 +26,7 @@ router.route('/collections-details').get(async (req, res) => {
 
 router.route('/update-collection/').post(async (req, res) => {
   if(req.headers.authorization === 'Bearer ' + process.env.AUTH_TOKEN){
-
-    const result = await mysql.manageCollectionDetails(
+    const result = await manageCollectionDetails(
        req.body.nftAddress,
        req.body.nftId,
        req.body.protectionTime
