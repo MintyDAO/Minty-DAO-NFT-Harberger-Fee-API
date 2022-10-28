@@ -1,21 +1,21 @@
 const mysql = require('../mysql')
 const parseSqlResult = require('./parseSqlResult')
 
-module.exports = async (nftAddress, nftId, protectionTime) => {
+module.exports = async (nftAddress, nftId, protectionTime, ipfsHash, format) => {
   const request = parseSqlResult(await mysql.getCollectionDetails(nftAddress))
   const dataJson = request.length > 0 ? JSON.parse(request[0]['nfts']) : {}
   // should update collection
   if(dataJson.hasOwnProperty(nftAddress)){
 
-    dataJson[nftAddress].filter(item => {
+    dataJson.filter(item => {
       // update if such nft exist
       if(item.nftId === nftId){
         item.protectionTime = protectionTime
       }
       // insert new nft
       else{
-        dataJson[nftAddress].push(
-          {nftId, protectionTime}
+        dataJson.push(
+          {nftId, protectionTime, ipfsHash, format}
         )
       }
     });
@@ -24,11 +24,10 @@ module.exports = async (nftAddress, nftId, protectionTime) => {
   }
   // should insert collection
   else{
-    const dataJson = {
-      [nftAddress]:[
-        {nftId, protectionTime}
+    const dataJson =
+      [
+        {nftId, protectionTime, ipfsHash, format}
       ]
-    }
 
     return await mysql.insertCollectionDetails(nftAddress, dataJson)
   }
