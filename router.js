@@ -29,7 +29,9 @@ router.route('/update-collection/').post(async (req, res) => {
     const result = await manageCollectionDetails(
        req.body.nftAddress,
        req.body.nftId,
-       req.body.protectionTime
+       req.body.protectionTime,
+       req.body.ipfsHash,
+       req.body.format
      )
 
     switch(result) {
