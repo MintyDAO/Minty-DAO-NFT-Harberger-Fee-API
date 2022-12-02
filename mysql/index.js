@@ -25,7 +25,8 @@ exports.insertNewCollection = async (
   uri,
   maxSupply,
   format,
-  ipfsHash
+  ipfsHash,
+  isMintable
 ) => {
   const q = `INSERT IGNORE INTO collections (
     address,
@@ -35,7 +36,8 @@ exports.insertNewCollection = async (
     uri,
     maxSupply,
     format,
-    ipfsHash
+    ipfsHash,
+    isMintable
   ) VALUES (?)`
   const values = [
     address,
@@ -45,7 +47,8 @@ exports.insertNewCollection = async (
     uri,
     maxSupply,
     format,
-    ipfsHash
+    ipfsHash,
+    isMintable
   ]
   try {
     await query(q, [values])

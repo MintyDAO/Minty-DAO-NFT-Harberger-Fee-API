@@ -24,11 +24,25 @@ module.exports = async (BlockLatest) => {
       const collection = new web3.eth.Contract(abi.NFT_COLLECTION_ABI, address)
       const name = await collection.methods.name().call()
       const symbol = await collection.methods.symbol().call()
-      const initialPrice = await collection.methods.initialPrice().call()
       const uri = await collection.methods.uri().call()
       const maxSupply = await collection.methods.maxSupply().call()
       const format = await collection.methods.format().call()
-      const ipfsHash = await collection.methods.ipfsHash().call()
+
+      // versions conflict
+
+      let initialPrice
+      let ipfsHash
+      let isMintable
+
+      try{
+        initialPrice = await collection.methods.initialPrice().call()
+        ipfsHash = await collection.methods.ipfsHash().call()
+        isMintable = 1
+      }catch(e){
+        initialPrice = 0
+        ipfsHash = ""
+        isMintable = 0
+      }
 
       await mysql.insertNewCollection(
         address,
