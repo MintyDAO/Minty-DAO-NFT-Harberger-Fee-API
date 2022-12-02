@@ -58,7 +58,8 @@ module.exports = async (BlockLatest) => {
         uri,
         maxSupply,
         format,
-        ipfsHash
+        ipfsHash,
+        isMintable
       )
     }
     console.log("Insert new collection")
