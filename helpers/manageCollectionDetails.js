@@ -1,7 +1,7 @@
 const mysql = require('../mysql')
 const parseSqlResult = require('./parseSqlResult')
 
-module.exports = async (nftAddress, nftId, protectionTime, ipfsHash, format) => {
+module.exports = async (nftAddress, nftId, protectionTime, ipfsHash, format, address, isMintable) => {
   const request = parseSqlResult(await mysql.getCollectionDetails(nftAddress))
   const dataJson = request.length > 0 ? JSON.parse(request[0]['nfts']) : {}
   // should update collection
@@ -15,7 +15,7 @@ module.exports = async (nftAddress, nftId, protectionTime, ipfsHash, format) => 
       // insert new nft
       else{
         dataJson.push(
-          {nftId, protectionTime, ipfsHash, format}
+          {nftId, protectionTime, ipfsHash, format, address, isMintable}
         )
       }
     });

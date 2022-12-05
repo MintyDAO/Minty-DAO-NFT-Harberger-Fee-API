@@ -31,7 +31,9 @@ router.route('/update-collection/').post(async (req, res) => {
        req.body.nftId,
        req.body.protectionTime,
        req.body.ipfsHash,
-       req.body.format
+       req.body.format,
+       req.body.address,
+       req.body.isMintable
      )
 
     switch(result) {
