@@ -26,7 +26,7 @@ module.exports = async (nftAddress, nftId, protectionTime, ipfsHash, format, add
   else{
     const dataJson =
       [
-        {nftId, protectionTime, ipfsHash, format}
+        {nftId, protectionTime, ipfsHash, format, address, isMintable}
       ]
 
     return await mysql.insertCollectionDetails(nftAddress, dataJson)
