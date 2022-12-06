@@ -46,11 +46,23 @@ const test = async(fromBlock, toBlock) => {
           break;
 
           case 'Protect':
-           console.log(`Protect TODO`)
+           console.log(`
+            Protect event detected
+            nft id : ${data.additionalData.id}
+            fromTime : ${data.additionalData.fromTime}
+            amount : ${data.additionalData.amount}
+            nft address : ${data.nft}
+            `)
           break;
 
           case 'ForceBuy':
-           console.log(`ForceBuy TODO`)
+          console.log(`
+           Mint event detected
+           nft id : ${data.additionalData.id}
+           amount : ${data.additionalData.amount}
+           newOwner : ${data.additionalData.newOwner}
+           nft address : ${data.nft}
+           `)
           break;
         }
       }
@@ -58,7 +70,11 @@ const test = async(fromBlock, toBlock) => {
   }
 }
 
-// find mints event here 
+// find mints event here
 test(25214353, 25219353)
 
-// test(25219353, 25219355)
+// protect event
+test(25222391, 25222399)
+
+// force buy event
+test(25222611, 25222617)
