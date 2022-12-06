@@ -17,14 +17,14 @@ exports.NFT_COLLECTION_ABI = [
 				"type": "uint256"
 			},
 			{
-				"internalType": "address",
-				"name": "_platformToken",
-				"type": "address"
-			},
-			{
 				"internalType": "uint256",
 				"name": "_initialPrice",
 				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_taxToken",
+				"type": "address"
 			},
 			{
 				"internalType": "address",
@@ -33,12 +33,7 @@ exports.NFT_COLLECTION_ABI = [
 			},
 			{
 				"internalType": "address",
-				"name": "_veHolders",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_sfHolders",
+				"name": "_config",
 				"type": "address"
 			},
 			{
@@ -114,6 +109,31 @@ exports.NFT_COLLECTION_ABI = [
 		"anonymous": false,
 		"inputs": [
 			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "ForceBuy",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
 				"indexed": false,
 				"internalType": "address",
 				"name": "userAddress",
@@ -133,6 +153,50 @@ exports.NFT_COLLECTION_ABI = [
 			}
 		],
 		"name": "MetaTransactionExecuted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "Mint",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "fromTime",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "Protect",
 		"type": "event"
 	},
 	{
@@ -163,6 +227,19 @@ exports.NFT_COLLECTION_ABI = [
 	{
 		"inputs": [],
 		"name": "ERC712_VERSION",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "NFTType",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -582,12 +659,7 @@ exports.NFT_COLLECTION_ABI = [
 			},
 			{
 				"internalType": "uint256",
-				"name": "veHoldersFee",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "sfHoldersFee",
+				"name": "stakeFee",
 				"type": "uint256"
 			},
 			{
@@ -719,19 +791,6 @@ exports.NFT_COLLECTION_ABI = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "sfHolders",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "bytes4",
@@ -758,6 +817,19 @@ exports.NFT_COLLECTION_ABI = [
 				"internalType": "string",
 				"name": "",
 				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "taxToken",
+		"outputs": [
+			{
+				"internalType": "contract IERC20",
+				"name": "",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -799,6 +871,24 @@ exports.NFT_COLLECTION_ABI = [
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "transfer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "from",
 				"type": "address"
 			},
@@ -830,23 +920,36 @@ exports.NFT_COLLECTION_ABI = [
 		],
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "veHolders",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
 	}
 ]
 
 exports.NFT_FACTORY_ABI = [
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_platformToken",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_nftFullFactory",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_nftLightFactory",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_nftUnlimitedFactory",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
 	{
 		"anonymous": false,
 		"inputs": [
@@ -903,9 +1006,57 @@ exports.NFT_FACTORY_ABI = [
 				"type": "uint256"
 			},
 			{
+				"internalType": "uint256",
+				"name": "_initialPrice",
+				"type": "uint256"
+			},
+			{
 				"internalType": "address",
-				"name": "_platformToken",
+				"name": "_config",
 				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_uri",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_format",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_ipfsHash",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "minLD",
+				"type": "uint256"
+			}
+		],
+		"name": "create",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "symbol",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_maxSupply",
+				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
@@ -914,17 +1065,12 @@ exports.NFT_FACTORY_ABI = [
 			},
 			{
 				"internalType": "address",
-				"name": "_veHolders",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_sfHolders",
+				"name": "_config",
 				"type": "address"
 			},
 			{
 				"internalType": "string",
-				"name": "_baseURI",
+				"name": "_uri",
 				"type": "string"
 			},
 			{
@@ -938,9 +1084,50 @@ exports.NFT_FACTORY_ABI = [
 				"type": "string"
 			}
 		],
-		"name": "create",
+		"name": "createLight",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "symbol",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "_config",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "minLD",
+				"type": "uint256"
+			}
+		],
+		"name": "createUnlimited",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllCollections",
+		"outputs": [
+			{
+				"internalType": "address[]",
+				"name": "addresses",
+				"type": "address[]"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -952,6 +1139,58 @@ exports.NFT_FACTORY_ABI = [
 			}
 		],
 		"name": "latestCollectionPerSender",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "nftFullFactory",
+		"outputs": [
+			{
+				"internalType": "contract IMintyDAONFTFullFactory",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "nftLightFactory",
+		"outputs": [
+			{
+				"internalType": "contract IMintyDAONFTLightFactory",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "nftUnlimitedFactory",
+		"outputs": [
+			{
+				"internalType": "contract IMintyDAONFTUnlimitedFactory",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "platformToken",
 		"outputs": [
 			{
 				"internalType": "address",
