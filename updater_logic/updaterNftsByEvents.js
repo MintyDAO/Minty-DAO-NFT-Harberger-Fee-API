@@ -61,6 +61,12 @@ const test = async(fromBlock, toBlock) => {
             amount : ${data.additionalData.amount}
             nft address : ${data.nft}
             `)
+
+            await manageCollectionDetails(
+               data.nft, // collection
+               data.additionalData.id, // nftId,
+               data.additionalData.fromTime, // protectionTime
+            )
           break;
 
           case 'ForceBuy':
