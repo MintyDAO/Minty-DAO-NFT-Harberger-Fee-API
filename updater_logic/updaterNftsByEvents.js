@@ -6,6 +6,7 @@ const web3 = web3Provider()
 
 const config = require('../config')
 const abi = require('../abi')
+const manageCollectionDetails = require('../helpers/manageCollectionDetails')
 
 // module.exports = async (BlockLatest) => {
 const test = async(fromBlock, toBlock) => {
@@ -37,12 +38,19 @@ const test = async(fromBlock, toBlock) => {
 
         switch(EventName){
          case 'Mint':
-          console.log(`
-           Mint event detected
-           nft id : ${data.additionalData.id}
-           owner : ${data.additionalData.owner}
-           nft address : ${data.nft}
-           `)
+           console.log(`Mint event detected`)
+
+           const { ipfsHash, format, isMintable } = await getNftInfo(web3, data.nft)
+
+           await manageCollectionDetails(
+              data.nft, // collection
+              data.additionalData.id, // nftId,
+              0, // protectionTime,
+              ipfsHash,
+              format,
+              data.nft // address,
+              isMintable
+           )
           break;
 
           case 'Protect':
@@ -68,6 +76,23 @@ const test = async(fromBlock, toBlock) => {
       }
     }
   }
+}
+
+const getNftInfo = async (web3, nftAddees) => {
+  const contract = new web3.eth.Contract(abi.NFT_COLLECTION_ABI, nftAddees)
+  let ipfsHash, format, isMintable
+
+  try{
+    ipfsHash = await contract.methods.ipfsHash().call()
+    format = await contract.methods.format().call()
+    isMintable = 1
+  }catch(e){
+    ipfsHash = ""
+    format = ""
+    isMintable = 0
+  }
+
+  return { ipfsHash, format, isMintable }
 }
 
 // find mints event here
