@@ -24,8 +24,8 @@ const restoreDB = async () => {
      // check again latest 5000
      await updaterNftsByEvents(updateBlock, currentBlock)
 
-     // process.exit(1)
      console.log("Finished ")
+     process.exit(1)
    }, 10000)
    }
 
