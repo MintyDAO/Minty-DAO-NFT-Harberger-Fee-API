@@ -102,10 +102,4 @@ const getNftInfo = async (web3, nftAddees) => {
 }
 
 // find mints event here
-test(25214353, 25219353)
-
-// protect event
-test(25222391, 25222399)
-
-// force buy event
-test(25222611, 25222617)
+test(25242535, 25242539)
