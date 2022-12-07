@@ -10,8 +10,7 @@ const socketManager = require('./socketManager')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 // wss
-// const BlockListener = require('./updater_logic/BlockListener')
-const BlockListenerHttp = require('./updater_logic/BlockListenerHttp')
+const mainUpdater = require('./updater_logic/mainUpdater')
 const memoryController = require('./memoryController')
 
 app.use(cors())
@@ -29,9 +28,8 @@ console.log('Listening on port ' + port + " Version 22/09/21")
 
 
 // Update smartfunds data when new Block was created
-// BlockListener
 // Use interval and http instead wss
-BlockListenerHttp()
+mainUpdater()
 
 // Reload app automaticly if there is little memory
 memoryController()
