@@ -23,6 +23,12 @@ CREATE TABLE collectionDetails(collection VARCHAR(128), nfts JSON, PRIMARY KEY(c
 
 ```
 
+# Restore data in DB
+
+```
+node updater_logic/restoreDB.js
+```
+
 ## Run API
 ```
 pm2 start app.js --name "MINTY-DAO-NFT"

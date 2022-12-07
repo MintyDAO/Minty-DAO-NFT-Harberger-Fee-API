@@ -6,6 +6,7 @@ const updaterNftsByEvents = require('./updaterNftsByEvents')
 const config = require('../config')
 
 const restoreDB = async () => {
+   console.log("Starting search updates ...")
    await updaterCollections()
 
    const currentBlock = await web3.eth.getBlockNumber()
