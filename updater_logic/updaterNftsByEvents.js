@@ -42,41 +42,39 @@ const test = async(fromBlock, toBlock) => {
 
            const { ipfsHash, format, isMintable } = await getNftInfo(web3, data.nft)
 
+           // insert
            await manageCollectionDetails(
               data.nft, // collection
               data.additionalData.id, // nftId,
               0, // protectionTime,
+              data.additionalData.owner, // owner
               ipfsHash,
               format,
-              data.nft // address,
+              data.nft, // address,
               isMintable
            )
           break;
 
           case 'Protect':
-           console.log(`
-            Protect event detected
-            nft id : ${data.additionalData.id}
-            fromTime : ${data.additionalData.fromTime}
-            amount : ${data.additionalData.amount}
-            nft address : ${data.nft}
-            `)
-
+           console.log(`Protect event detected`)
+            // update
             await manageCollectionDetails(
                data.nft, // collection
                data.additionalData.id, // nftId,
-               data.additionalData.fromTime, // protectionTime
+               Number(data.additionalData.fromTime) + 31536000, // protectionTime
+               data.additionalData.owner, // owner
             )
           break;
 
           case 'ForceBuy':
-          console.log(`
-           Mint event detected
-           nft id : ${data.additionalData.id}
-           amount : ${data.additionalData.amount}
-           newOwner : ${data.additionalData.newOwner}
-           nft address : ${data.nft}
-           `)
+          console.log(`Force buy event detected`)
+           // update
+           await manageCollectionDetails(
+              data.nft, // collection
+              data.additionalData.id, // nftId,
+              0, // protectionTime
+              data.additionalData.newOwner, // owner
+           )
           break;
         }
       }

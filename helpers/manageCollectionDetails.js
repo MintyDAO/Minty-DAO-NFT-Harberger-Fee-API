@@ -11,6 +11,7 @@ module.exports = async (
   nftAddress,
   nftId,
   protectionTime,
+  owner,
   ipfsHash=null,
   format=null,
   address=null,
@@ -25,11 +26,12 @@ module.exports = async (
       // update protection time if such nft exist in list
       if(item.nftId === nftId){
         item.protectionTime = protectionTime
+        item.owner = owner
       }
       // insert new nft
       else{
         dataJson.push(
-          {nftId, protectionTime, ipfsHash, format, address, isMintable}
+          {nftId, protectionTime, owner, ipfsHash, format, address, isMintable}
         )
       }
     });
@@ -40,7 +42,7 @@ module.exports = async (
   else{
     const dataJson =
       [
-        {nftId, protectionTime, ipfsHash, format, address, isMintable}
+        {nftId, protectionTime, owner, ipfsHash, format, address, isMintable}
       ]
 
     return await mysql.insertCollectionDetails(nftAddress, dataJson)
