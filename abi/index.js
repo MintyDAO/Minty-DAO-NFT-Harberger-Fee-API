@@ -191,6 +191,12 @@ exports.NFT_COLLECTION_ABI = [
 			},
 			{
 				"indexed": false,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": false,
 				"internalType": "uint256",
 				"name": "amount",
 				"type": "uint256"
