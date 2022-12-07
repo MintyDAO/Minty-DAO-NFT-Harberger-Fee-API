@@ -8,15 +8,10 @@ const config = require('../config')
 const abi = require('../abi')
 const manageCollectionDetails = require('../helpers/manageCollectionDetails')
 
-// module.exports = async (BlockLatest) => {
-const test = async(fromBlock, toBlock) => {
+module.exports = async (fromBlock, toBlock) => {
   // get all collections addresses
   const factory = new web3.eth.Contract(abi.NFT_FACTORY_ABI, config.NFT_FACTORY)
   const collections = await factory.methods.getAllCollections().call()
-
-  console.log(collections)
-
-  // (address, abi, fromBlock, toBlock, eventName, web3)
 
   // listen events for all addresses
 
@@ -98,6 +93,3 @@ const getNftInfo = async (web3, nftAddees) => {
 
   return { ipfsHash, format, isMintable }
 }
-
-// find mints event here
-test(25242535, 25242539)

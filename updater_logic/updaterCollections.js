@@ -9,7 +9,7 @@ const web3Provider = require('../web3/web3Provider')
 const web3 = web3Provider()
 
 // Search NFTCreated event in each new block - 5 blocks for ensure
-module.exports = async (BlockLatest) => {
+module.exports = async () => {
   const factory = new web3.eth.Contract(abi.NFT_FACTORY_ABI, config.NFT_FACTORY)
   const nftInDB = await mysql.countCollections()
   const nftInContract = await factory.methods.totalCollections().call()

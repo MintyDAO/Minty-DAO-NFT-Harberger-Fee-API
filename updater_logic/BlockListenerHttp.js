@@ -12,7 +12,7 @@ module.exports = () => {
 async function runUpdates() {
   const block = await web3.eth.getBlockNumber()
   if(prevBlock !== block){
-    updaterCollections(block)
+    updaterCollections()
     prevBlock = block
   }
 }

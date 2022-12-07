@@ -1,6 +1,7 @@
 
-// // POLYGON
+// BSC testnet
 exports.NFT_FACTORY = "0xEc69B458eFD242742574318dAb536C9Ce6dAaA64"
+exports.FactoryCreationBlock = 25242170
 
 // // POLYGON TEST NET
 // exports.NFT_FACTORY = "0xD4dfa7A87AfEA14DF696C8C646f82ed79d798cdE"
