@@ -9,13 +9,14 @@ const restoreDB = async () => {
    await updaterCollections()
 
    const currentBlock = await web3.eth.getBlockNumber()
-   let updateBlock = config.FactoryCreationBlock
+   let updateBlock = config.FactoryCreationBlock - 5000
 
 
    setTimeout(async () => {
      // restore history
      while (updateBlock < currentBlock) {
-       await updaterNftsByEvents(updateBlock, currentBlock)
+       console.log("Search updates between blocks", updateBlock, updateBlock+5000)
+       await updaterNftsByEvents(updateBlock, updateBlock+5000)
        updateBlock+=5000
      }
 
@@ -23,6 +24,7 @@ const restoreDB = async () => {
      await updaterNftsByEvents(updateBlock, currentBlock)
 
      // process.exit(1)
+     console.log("Finished ")
    }, 10000)
    }
 

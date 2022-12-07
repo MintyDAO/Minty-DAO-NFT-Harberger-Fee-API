@@ -9,6 +9,7 @@ const abi = require('../abi')
 const manageCollectionDetails = require('../helpers/manageCollectionDetails')
 
 module.exports = async (fromBlock, toBlock) => {
+  console.log(fromBlock, toBlock)
   // get all collections addresses
   const factory = new web3.eth.Contract(abi.NFT_FACTORY_ABI, config.NFT_FACTORY)
   const collections = await factory.methods.getAllCollections().call()
