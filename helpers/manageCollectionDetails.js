@@ -20,8 +20,7 @@ module.exports = async (
   const request = parseSqlResult(await mysql.getCollectionDetails(nftAddress))
   const dataJson = request.length > 0 ? JSON.parse(request[0]['nfts']) : {}
   // should update collection
-  if(dataJson.hasOwnProperty(nftAddress)){
-
+  if(Object.keys(dataJson).length !== 0) {
     dataJson.filter(item => {
       // update protection time if such nft exist in list
       if(item.nftId === nftId){
@@ -35,7 +34,6 @@ module.exports = async (
         )
       }
     });
-
     return await mysql.updateCollectionDetails(nftAddress, dataJson)
   }
   // should insert new collection
