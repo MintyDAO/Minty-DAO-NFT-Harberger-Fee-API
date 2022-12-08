@@ -26,7 +26,6 @@ module.exports = async (
     // update protection time if such nft exist in list
     if(ids.includes(nftId)){
       dataJson.filter(item => {
-        console.log(item.nftId, nftId)
         if(item.nftId === nftId){
           item.protectionTime = protectionTime
           item.owner = owner
