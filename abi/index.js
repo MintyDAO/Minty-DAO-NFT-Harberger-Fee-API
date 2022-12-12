@@ -320,6 +320,19 @@ exports.NFT_COLLECTION_ABI = [
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "creatorFeePercent",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -569,6 +582,19 @@ exports.NFT_COLLECTION_ABI = [
 	},
 	{
 		"inputs": [],
+		"name": "maxFeeToSet",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "maxSupply",
 		"outputs": [
 			{
@@ -596,6 +622,19 @@ exports.NFT_COLLECTION_ABI = [
 		"name": "mint",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "mintPrice",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -769,6 +808,19 @@ exports.NFT_COLLECTION_ABI = [
 		"inputs": [
 			{
 				"internalType": "uint256",
+				"name": "_creatorFeePercent",
+				"type": "uint256"
+			}
+		],
+		"name": "setCreatorFee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
 				"name": "_fee",
 				"type": "uint256"
 			}
@@ -794,6 +846,32 @@ exports.NFT_COLLECTION_ABI = [
 		"name": "setProtection",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_stakeFeePercent",
+				"type": "uint256"
+			}
+		],
+		"name": "setStakeFee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "stakeFeePercent",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
