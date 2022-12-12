@@ -31,7 +31,8 @@ module.exports = async () => {
       let uri
 
       try{
-        initialPrice = await collection.methods.initialPrice().call()
+        initialPrice = await collection.methods.mintPrice().call()
+        initialProtection = await collection.methods.initialPrice().call()
         ipfsHash = await collection.methods.ipfsHash().call()
         format = await collection.methods.format().call()
         maxSupply = await collection.methods.maxSupply().call()
@@ -39,6 +40,7 @@ module.exports = async () => {
         isMintable = 1
       }catch(e){
         initialPrice = 0
+        initialProtection = 0
         ipfsHash = ""
         format = ""
         maxSupply = 0

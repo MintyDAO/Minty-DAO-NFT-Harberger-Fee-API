@@ -16,7 +16,7 @@ AUTH_TOKEN=
 ```
 CREATE DATABASE MintyDAONFT;
 
-CREATE TABLE collections(address VARCHAR(128), name VARCHAR(128), symbol VARCHAR(128), initialPrice VARCHAR(128), uri VARCHAR(128), maxSupply VARCHAR(128), format VARCHAR(128), ipfsHash VARCHAR(128), isMintable TINYINT(1), PRIMARY KEY(address));
+CREATE TABLE collections(address VARCHAR(128), name VARCHAR(128), symbol VARCHAR(128), initialPrice VARCHAR(128), initialProtection VARCHAR(128), uri VARCHAR(128), maxSupply VARCHAR(128), format VARCHAR(128), ipfsHash VARCHAR(128), isMintable TINYINT(1), PRIMARY KEY(address));
 
 
 CREATE TABLE collectionDetails(collection VARCHAR(128), nfts JSON, PRIMARY KEY(collection));
